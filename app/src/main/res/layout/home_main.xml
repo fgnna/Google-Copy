@@ -19,6 +19,11 @@
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
 
+        <FrameLayout android:id="@+id/fragments"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent">
+
+        </FrameLayout>
 
         <android.support.design.widget.FloatingActionButton
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -28,20 +33,22 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_marginBottom="70dp"
+            android:layout_marginRight="10dp"
             app:srcCompat="@android:drawable/ic_dialog_email"/>
 
         <LinearLayout android:layout_width="match_parent"
                       android:layout_height="60dp"
                       android:layout_gravity="bottom|end"
+
                       android:background="#262626"
                       android:orientation="horizontal">
 
             <RelativeLayout android:id="@+id/m_home_firstpager"
                             style="@style/home_buttom">
                 <ImageView android:id="@+id/firstpager_img"
-                           android:src="@drawable/ic_home_white_24dp"
                            android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"/>
+                           android:layout_height="wrap_content"
+                           android:src="@drawable/ic_home_white_24dp"/>
                 <TextView
                     style="@style/home_buttom_text"
                     android:layout_below="@id/firstpager_img"
@@ -49,11 +56,11 @@
             </RelativeLayout>
 
             <RelativeLayout android:id="@+id/m_home_collection"
-                            style="@style/home_buttom">>
+                            style="@style/home_buttom">
                 <ImageView android:id="@+id/collection_img"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:src="@drawable/ic_group_work_white_24dp"/>
+                           android:src="@drawable/ic_bookmark_white_24dp"/>
 
                 <TextView
                     style="@style/home_buttom_text"
@@ -148,14 +155,14 @@
             <RelativeLayout android:layout_width="match_parent"
                             android:layout_height="48dp"
                             android:layout_gravity="center_horizontal"
-
+                            android:id="@+id/m_home_drawleft_personaldata"
                             android:orientation="horizontal">
-                <ImageView android:id="@+id/m_home_drawleft_personaldata"
+                <ImageView android:id="@+id/m_home_drawleft_personaldata_img"
                            style="@style/home_drawlayout_item_img"
                            android:src="@drawable/ic_account_circle_black_24dp"/>
                 <TextView
                     style="@style/home_drawlayout_text"
-                    android:layout_toRightOf="@id/m_home_drawleft_personaldata"
+                    android:layout_toRightOf="@id/m_home_drawleft_personaldata_img"
                     android:text="个人资料"/>
             </RelativeLayout>
 
@@ -163,38 +170,40 @@
             <RelativeLayout android:layout_width="match_parent"
                             android:layout_height="48dp"
                             android:layout_gravity="center_horizontal"
-
+                            android:id="@+id/m_home_drawleft_connection"
                             android:orientation="horizontal">
-                <ImageView android:id="@+id/m_home_drawleft_connection"
+                <ImageView android:id="@+id/m_home_drawleft_connection_img"
                            style="@style/home_drawlayout_item_img"
                            android:src="@drawable/ic_supervisor_account_black_24dp"/>
                 <TextView style="@style/home_drawlayout_text"
-                          android:layout_toRightOf="@id/m_home_drawleft_connection"
+                          android:layout_toRightOf="@id/m_home_drawleft_connection_img"
                           android:text="人脉"/>
             </RelativeLayout>
 
             <RelativeLayout android:layout_width="match_parent"
                             android:layout_height="48dp"
                             android:layout_gravity="center_horizontal"
+                            android:id="@+id/m_home_drawleft_location"
                             android:orientation="horizontal">
-                <ImageView android:id="@+id/m_home_drawleft_location"
+                <ImageView android:id="@+id/m_home_drawleft_location_img"
                            style="@style/home_drawlayout_item_img"
                            android:src="@drawable/ic_my_location_black_24dp"/>
                 <TextView style="@style/home_drawlayout_text"
-                          android:layout_toRightOf="@id/m_home_drawleft_location"
+                          android:layout_toRightOf="@id/m_home_drawleft_location_img"
                           android:text="位置信息"/>
             </RelativeLayout>
 
             <RelativeLayout android:layout_width="match_parent"
                             android:layout_height="48dp"
+                            android:id="@+id/m_home_drawleft_activity"
                             android:layout_gravity="center_horizontal"
 
                             android:orientation="horizontal">
-                <ImageView android:id="@+id/m_home_drawleft_activity"
+                <ImageView android:id="@+id/m_home_drawleft_activity_img"
                            style="@style/home_drawlayout_item_img"
                            android:src="@drawable/ic_event_black_24dp"/>
                 <TextView style="@style/home_drawlayout_text"
-                          android:layout_toRightOf="@id/m_home_drawleft_activity"
+                          android:layout_toRightOf="@id/m_home_drawleft_activity_img"
                           android:text="活动"/>
 
             </RelativeLayout>
@@ -202,13 +211,13 @@
             <RelativeLayout android:layout_width="match_parent"
                             android:layout_height="48dp"
                             android:layout_gravity="center_horizontal"
-
+                            android:id="@+id/m_home_drawleft_setting"
                             android:orientation="horizontal">
-                <ImageView android:id="@+id/m_home_drawleft_setting"
+                <ImageView android:id="@+id/m_home_drawleft_setting_img"
                            style="@style/home_drawlayout_item_img"
                            android:src="@drawable/ic_settings_black_24dp"/>
                 <TextView style="@style/home_drawlayout_text"
-                          android:layout_toRightOf="@id/m_home_drawleft_setting"
+                          android:layout_toRightOf="@id/m_home_drawleft_setting_img"
                           android:text="设置"/>
 
             </RelativeLayout>
@@ -216,25 +225,27 @@
             <RelativeLayout android:layout_width="match_parent"
                             android:layout_height="48dp"
                             android:layout_gravity="center_horizontal"
+                            android:id="@+id/m_home_drawleft_send"
                             android:orientation="horizontal">
-                <ImageView android:id="@+id/m_home_drawleft_send"
+                <ImageView android:id="@+id/m_home_drawleft_send_img"
                            style="@style/home_drawlayout_item_img"
                            android:src="@drawable/ic_announcement_black_24dp"/>
                 <TextView style="@style/home_drawlayout_text"
-                          android:layout_toRightOf="@id/m_home_drawleft_send"
+                          android:layout_toRightOf="@id/m_home_drawleft_send_img"
                           android:text="发送反馈"/>
 
             </RelativeLayout>
 
             <RelativeLayout android:layout_width="match_parent"
                             android:layout_height="48dp"
+                            android:id="@+id/m_home_drawleft_help"
                             android:layout_gravity="center_horizontal"
                             android:orientation="horizontal">
-                <ImageView android:id="@+id/m_home_drawleft_help"
+                <ImageView android:id="@+id/m_home_drawleft_help_img"
                            style="@style/home_drawlayout_item_img"
                            android:src="@drawable/ic_help_black_24dp"/>
                 <TextView style="@style/home_drawlayout_text"
-                          android:layout_toRightOf="@id/m_home_drawleft_help"
+                          android:layout_toRightOf="@id/m_home_drawleft_help_img"
                           android:text="帮助"/>
 
             </RelativeLayout>
