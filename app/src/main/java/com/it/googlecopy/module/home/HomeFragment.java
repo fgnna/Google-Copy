@@ -25,7 +25,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
-        View view = inflater.inflate(R.layout.home_fragment, container,true);
+        View view = inflater.inflate(R.layout.home_fragment, container,false);
         mToolbar= (Toolbar) view.findViewById(R.id.toolbar);
         return view;
     }

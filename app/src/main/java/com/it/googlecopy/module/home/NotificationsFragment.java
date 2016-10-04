@@ -33,7 +33,7 @@ public class NotificationsFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         HomeActivity activity = (HomeActivity) getActivity();
-        mToolbar.setTitle("收藏集");
+        mToolbar.setTitle("通知");
         activity.setSupportActionBar(mToolbar);
 
         DrawerLayout drawerLayout = (DrawerLayout) activity.findViewById(R.id.drawer_layout);

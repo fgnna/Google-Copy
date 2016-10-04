@@ -8,17 +8,21 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.it.googlecopy.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
 
-
+    Fragment currentFragment;
     public Toolbar mToolbar;
     FragmentManager fm;
     HomeFragment home_fragment;
@@ -29,7 +33,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     RelativeLayout mCollection;
     RelativeLayout mWork;
     RelativeLayout mNotifications;
-
+    List<Fragment> mFragmentList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +43,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
         initView();
-        initToolbar("首页");
         initDrawerLayout();
-        initFragments();
         initListener();
 
 
@@ -54,13 +56,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         mNotifications.setOnClickListener(this);
     }
 
-    private void initFragments() {
-        home_fragment = new HomeFragment();
-        collection_fragment = new CollectionFragment();
-        work_fragment = new WorkFragment();
-        notifications_fragment = new NotificationsFragment();
 
-    }
 
     public void initDrawerLayout() {
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -72,16 +68,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public void initToolbar(String title) {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mToolbar.setTitle(title);
-        setSupportActionBar(mToolbar);
-    }
-
 
     private void initView() {
+        mFragmentList = new ArrayList<>();
         CircleImageView mHomeDrawLayoutHead = (CircleImageView) findViewById(R.id
                 .m_home_drawleft_head);
+
+        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.m_home_framelayout);
+        home_fragment = new HomeFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.m_home_framelayout,home_fragment,"home").addToBackStack(null).commit();
+        mFragmentList.add(home_fragment);
 
         mFirstPager = (RelativeLayout) findViewById(R.id.m_home_firstpager);
         mCollection = (RelativeLayout) findViewById(R.id.m_home_collection);
@@ -99,24 +95,42 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         fm = getSupportFragmentManager();
         switch (view.getId()) {
             case R.id.m_home_firstpager:
-
-                if(findViewById(R.id.empty_fragment) != null) {
-                    System.out.println("first");
-                    //fm.beginTransaction().replace(R.id.empty_fragment, home_fragment).commit();
-                    fm.beginTransaction().show(home_fragment).commit();
+                if(home_fragment == null){
+                    home_fragment = new HomeFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.m_home_framelayout,home_fragment,"home").
+                            addToBackStack(null).commit();
+                    mFragmentList.add(home_fragment);
                 }
+                showFragment("home");
                 break;
             case R.id.m_home_collection:
                 System.out.println("collection");
-                fm.beginTransaction().replace(R.id.empty_fragment, collection_fragment).commit();
+                if(collection_fragment == null){
+                    collection_fragment = new CollectionFragment();
+
+                    getSupportFragmentManager().beginTransaction().replace(R.id.m_home_framelayout,collection_fragment,"collection")
+                            .addToBackStack(null).commit();
+                    mFragmentList.add(home_fragment);
+                }
+                showFragment("collection");
                 break;
             case R.id.m_home_work:
                 System.out.println("work");
-                fm.beginTransaction().replace(R.id.empty_fragment, work_fragment).commit();
+                if(work_fragment == null){
+                    work_fragment = new WorkFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.m_home_framelayout,home_fragment,"home").commit();
+                    mFragmentList.add(work_fragment);
+                }
+                showFragment("work");
                 break;
             case R.id.m_home_notifications:
                 System.out.println("notifications");
-                fm.beginTransaction().replace(R.id.empty_fragment, notifications_fragment).commit();
+                if(notifications_fragment == null){
+                    notifications_fragment = new NotificationsFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.m_home_framelayout,notifications_fragment,"notifications").commit();
+                    mFragmentList.add(home_fragment);
+                }
+                showFragment("notifications");
                 break;
 
             case R.id.m_home_drawleft_personaldata:
@@ -133,6 +147,19 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.m_home_drawleft_help:
                 break;
+        }
+    }
+
+    private void showFragment(String tag) {
+        for (Fragment fragment : mFragmentList) {
+            Fragment tagFragment = getSupportFragmentManager().findFragmentByTag(tag);
+            String tag1 = fragment.getTag();
+
+            if(tag1 == tag){
+                getSupportFragmentManager().beginTransaction().show(tagFragment).commit();
+            }else {
+                getSupportFragmentManager().beginTransaction().hide(tagFragment).commit();
+            }
         }
     }
 
