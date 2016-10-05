@@ -1,5 +1,6 @@
 package com.it.googlecopy.module.home;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -40,6 +41,8 @@ public class WorkFragment extends Fragment {
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(activity,
                 drawerLayout, mToolbar, R.string.navigation_drawer_open, R.string
                 .navigation_drawer_close);
+        mToolbar.setBackgroundResource(android.R.color.holo_green_dark);
+        mToolbar.setTitleTextColor(Color.WHITE);
         drawerToggle.syncState();
     }
 }
