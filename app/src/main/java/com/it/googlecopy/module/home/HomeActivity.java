@@ -84,11 +84,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         home_fragment = new HomeFragment();
         getSupportFragmentManager().beginTransaction().replace(m_home_framelayout,home_fragment,"home").commitNow();
+        home_fragment.initData();
         mFragmentList.add(home_fragment);
 
-
         Glide.with(this).load("http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg").into(mHomeDrawLayoutHead);
-
 
     }
 
@@ -153,6 +152,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /** fragement的显示 */
     private void showFragment(String tag) {
             Fragment tagFragment = getSupportFragmentManager().findFragmentByTag(tag);
         for (Fragment fragment : mFragmentList) {

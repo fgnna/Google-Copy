@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
@@ -18,6 +20,10 @@ import android.view.LayoutInflater;
 import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -39,6 +45,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static android.R.attr.fragment;
+
 /**
  * Created by je on 16-10-2.
  */
@@ -47,6 +55,7 @@ public class HomeFragment extends Fragment {
     Toolbar mToolbar;
     RecyclerView mRecyclerView;
     List<HomeItem.DataBean> mDataBeen;
+    FloatingActionButton fab;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
@@ -54,6 +63,8 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.home_fragment, container,false);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.home_fragment_recyvlerview);
         mToolbar= (Toolbar) view.findViewById(R.id.toolbar);
+        fab = (FloatingActionButton) view.findViewById(R.id.fab);
+
         return view;
     }
 
@@ -73,6 +84,12 @@ public class HomeFragment extends Fragment {
         mToolbar.setTitleTextColor(Color.WHITE);
         drawerToggle.syncState();
         initData();
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(),"meg",Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -98,7 +115,8 @@ public class HomeFragment extends Fragment {
                 mRecyclerView.setLayoutManager(linearLayoutManager);
                 mRecyclerView.setItemAnimator(new DefaultItemAnimator());  //设置item默认动画
                 mRecyclerView.setAdapter(homeItemAdapter);
-                System.out.println(mDataBeen.toString());
+
+                homeItemAdapter.notifyDataSetChanged();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -113,11 +131,10 @@ public class HomeFragment extends Fragment {
                 return map;
             }
         };
-
         requestQueue.add(stringRequest);
-        System.out.println("完毕");
-
-
-
     }
+
+
+
+
 }
