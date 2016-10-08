@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -13,19 +12,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.it.googlecopy.R;
-import com.it.googlecopy.base.BaseFragment;
 
 /**
  * Created by je on 16-10-2.
  */
 
-public class NotificationsFragment extends Fragment {
+public class MeFragment extends Fragment {
     Toolbar mToolbar;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable
             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.notifications_fragment, container, false);
+
+        View view = inflater.inflate(R.layout.me_fragment, container, false);
         mToolbar= (Toolbar) view.findViewById(R.id.toolbar);
         return view;
     }
@@ -34,16 +33,15 @@ public class NotificationsFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         HomeActivity activity = (HomeActivity) getActivity();
-        mToolbar.setTitle("通知");
+        mToolbar.setTitle("");
         activity.setSupportActionBar(mToolbar);
 
         DrawerLayout drawerLayout = (DrawerLayout) activity.findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(activity,
                 drawerLayout, mToolbar, R.string.navigation_drawer_open, R.string
                 .navigation_drawer_close);
-        mToolbar.setBackgroundResource(android.R.color.holo_red_dark);
+        //mToolbar.setBackgroundResource(android.R.color.holo_green_dark);
         mToolbar.setTitleTextColor(Color.WHITE);
         drawerToggle.syncState();
     }
 }
-

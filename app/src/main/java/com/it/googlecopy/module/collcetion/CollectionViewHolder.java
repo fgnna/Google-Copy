@@ -12,6 +12,26 @@ import com.it.googlecopy.R;
  */
 
 public class CollectionViewHolder extends RecyclerView.ViewHolder {
+    public ImageView getCollection_imgtop() {
+        return collection_imgtop;
+    }
+
+    public ImageView getCollection_imgbuttom() {
+        return collection_imgbuttom;
+    }
+
+    public ImageView getCollection_imgHead() {
+        return collection_imgHead;
+    }
+
+    public TextView getCollection_text_auther() {
+        return collection_text_auther;
+    }
+
+    public TextView getCollection_text_titile() {
+        return collection_text_titile;
+    }
+
     private ImageView collection_imgtop;
     private ImageView collection_imgbuttom;
     private ImageView collection_imgHead;

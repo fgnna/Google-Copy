@@ -5,9 +5,9 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-        <android.support.design.widget.CoordinatorLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
         <FrameLayout android:layout_width="match_parent"
@@ -23,9 +23,9 @@
                           android:background="#262626"
                           android:orientation="horizontal">
 
-                <RelativeLayout android:id="@+id/m_home_firstpager"
-
-                                style="@style/home_buttom">
+                <RelativeLayout
+                    android:id="@+id/m_home_firstpager"
+                    style="@style/home_buttom">
                     <ImageView android:id="@+id/firstpager_img"
                                android:layout_width="wrap_content"
                                android:layout_height="wrap_content"
@@ -58,13 +58,15 @@
                     <TextView
                         style="@style/home_buttom_text"
                         android:layout_below="@id/work_img"
-                        android:text="社群"/>
+                        android:text="我的"/>
                 </RelativeLayout>
 
-                <RelativeLayout android:id="@+id/m_home_notifications"
+                <RelativeLayout
+                    android:id="@+id/m_home_notifications"
                                 style="@style/home_buttom">
 
-                    <ImageView android:id="@+id/notifications_img"
+                    <ImageView
+                        android:id="@+id/notifications_img"
                                android:layout_width="wrap_content"
                                android:layout_height="wrap_content"
                                android:src="@drawable/ic_notifications_white_24dp"/>
@@ -72,14 +74,15 @@
                     <TextView
                         style="@style/home_buttom_text"
                         android:layout_below="@id/notifications_img"
-                        android:text="通知"/>
+                        android:text="设置"/>
                 </RelativeLayout>
             </LinearLayout>
 
         </FrameLayout>
-        </android.support.design.widget.CoordinatorLayout>
+    </android.support.design.widget.CoordinatorLayout>
 
-    <LinearLayout android:id="@+id/m_home_drawleft"
+    <LinearLayout
+        android:id="@+id/m_home_drawleft"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
                   android:layout_gravity="start"
@@ -89,7 +92,9 @@
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:background="@drawable/head_bg">
-            <RelativeLayout android:layout_width="match_parent"
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                             android:layout_height="match_parent">
                 <de.hdodenhof.circleimageview.CircleImageView
                     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -132,7 +137,9 @@
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:orientation="vertical">
-            <RelativeLayout android:id="@+id/m_home_drawleft_personaldata"
+
+            <RelativeLayout
+                android:id="@+id/m_home_drawleft_personaldata"
                             android:layout_width="match_parent"
                             android:layout_height="48dp"
                             android:layout_gravity="center_horizontal"

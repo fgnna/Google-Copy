@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,12 +13,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 import com.it.googlecopy.R;
-import com.it.googlecopy.base.BaseFragment;
+import com.it.googlecopy.module.collcetion.CollectionBean;
 import com.it.googlecopy.module.collcetion.CollectionPagerAdapter;
-import com.it.googlecopy.module.collcetion.PagerFragment1;
-import com.it.googlecopy.module.collcetion.PagerFragment2;
-import com.it.googlecopy.module.collcetion.PagerFragment3;
+import com.it.googlecopy.module.collcetion.ChoiceFragment;
+
+import java.util.List;
 
 /**
  * Created by je on 16-10-2.
@@ -30,6 +35,7 @@ public class CollectionFragment extends Fragment {
     Toolbar mToolbar;
     View rootView;
     HomeActivity activity;
+    private List<CollectionBean.DataBean> mBeanList;
 
 
     @Nullable
@@ -48,9 +54,9 @@ public class CollectionFragment extends Fragment {
         CollectionPagerAdapter pagerAdapter = new CollectionPagerAdapter(activity
                 .getSupportFragmentManager());
 
-        pagerAdapter.addFragment(PagerFragment1.newInstance(), "精选");
-        pagerAdapter.addFragment(PagerFragment1.newInstance(), "已关注");
-        pagerAdapter.addFragment(PagerFragment1.newInstance(), "你的收藏者");
+        pagerAdapter.addFragment(ChoiceFragment.newInstance(mBeanList), "精选");
+        pagerAdapter.addFragment(ChoiceFragment.newInstance(mBeanList), "已关注");
+        pagerAdapter.addFragment(ChoiceFragment.newInstance(mBeanList), "你的收藏者");
         viewPager.setAdapter(pagerAdapter);
         TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.m_colletion_tablayout);
         tabLayout.setBackgroundResource(android.R.color.holo_blue_dark);
@@ -64,7 +70,31 @@ public class CollectionFragment extends Fragment {
         activity = (HomeActivity) getActivity();
         initToolbar();
         initDrawerLayout();
-        initViewPagerAndTabs();
+        initData();
+    }
+
+    public void initData() {
+        final Gson gson = new Gson();
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://192.168.1" +
+                ".105:8080/demo/keep", new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                System.out.println("keep 成功");
+                CollectionBean collectionBean = gson.fromJson(response, CollectionBean.class);
+                mBeanList = collectionBean.getData();
+                initViewPagerAndTabs();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("keep 失败");
+            }
+        });
+
+        requestQueue.add(stringRequest);
+
 
     }
 

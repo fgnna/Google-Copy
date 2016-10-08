@@ -32,6 +32,7 @@
                 android:id="@+id/home_item_arrowimg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:scaleType="centerInside"
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@id/home_item_name"
                 android:src="@drawable/ic_keyboard_arrow_right_black_24dp"/>
@@ -54,8 +55,11 @@
                   android:text="标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题"
                   android:maxLines="1"
                   android:layout_height="wrap_content"/>
-        <ImageView android:layout_width="match_parent" android:layout_height="wrap_content"
+
+        <ImageView android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
                    android:id="@+id/home_item_contentimg"
+                   android:scaleType="centerCrop"
                    android:src="@drawable/bg"/>
         <RelativeLayout android:layout_width="match_parent"
 

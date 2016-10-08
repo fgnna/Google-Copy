@@ -3,6 +3,8 @@ package com.it.googlecopy.module.collcetion;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,7 @@ public class CollectionPagerAdapter extends FragmentPagerAdapter {
     public CollectionPagerAdapter(FragmentManager fm) {
         super(fm);
     }
+
 
     @Override
     public CharSequence getPageTitle(int position) {

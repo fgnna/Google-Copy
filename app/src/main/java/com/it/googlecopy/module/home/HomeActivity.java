@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
@@ -29,8 +28,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     FragmentManager fm;
     HomeFragment home_fragment;
     CollectionFragment collection_fragment;
-    WorkFragment work_fragment;
-    NotificationsFragment notifications_fragment;
+    MeFragment me_fragment;
+    SettingFragment setting_fragment;
+
     RelativeLayout mFirstPager;
     RelativeLayout mCollection;
     RelativeLayout mWork;
@@ -80,8 +80,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         mCollection = (RelativeLayout) findViewById(R.id.m_home_collection);
         mNotifications = (RelativeLayout) findViewById(R.id.m_home_notifications);
         mWork = (RelativeLayout) findViewById(R.id.m_home_work);
-
-
         home_fragment = new HomeFragment();
         getSupportFragmentManager().beginTransaction().replace(m_home_framelayout,home_fragment,"home").commitNow();
         home_fragment.initData();
@@ -97,17 +95,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         fm = getSupportFragmentManager();
         switch (view.getId()) {
             case R.id.m_home_firstpager:
-                if(home_fragment == null){
-                    home_fragment = new HomeFragment();
-                    fm.beginTransaction().add(home_fragment,"home").commit();
-
-                    mFragmentList.add(home_fragment);
+                if(setting_fragment != null) {
+                    getFragmentManager().beginTransaction().hide(setting_fragment).commit();
                 }
                 showFragment("home");
-                home_fragment.initData();
                 break;
             case R.id.m_home_collection:
                 System.out.println("collection");
+                if(setting_fragment != null) {
+                    getFragmentManager().beginTransaction().hide(setting_fragment).commit();
+                }
                 if(collection_fragment == null){
                     collection_fragment = new CollectionFragment();
                     fm.beginTransaction().add(R.id.m_home_framelayout,collection_fragment,"collection").commitNow();
@@ -118,21 +115,23 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.m_home_work:
                 System.out.println("work");
-                if(work_fragment == null){
-                    work_fragment = new WorkFragment();
-                    fm.beginTransaction().add(R.id.m_home_framelayout,work_fragment,"work").commitNow();
-                    mFragmentList.add(work_fragment);
+                if(setting_fragment != null) {
+                    getFragmentManager().beginTransaction().hide(setting_fragment).commit();
                 }
-                showFragment("work");
+                if(me_fragment == null){
+                    me_fragment = new MeFragment();
+                    fm.beginTransaction().add(R.id.m_home_framelayout, me_fragment,"me").commitNow();
+                    mFragmentList.add(me_fragment);
+                }
+                showFragment("me");
                 break;
             case R.id.m_home_notifications:
-                System.out.println("notifications");
-                if(notifications_fragment == null){
-                    notifications_fragment = new NotificationsFragment();
-                    fm.beginTransaction().add(R.id.m_home_framelayout,notifications_fragment,"notifications").commitNow();
-                    mFragmentList.add(notifications_fragment);
+                System.out.println("setting");
+                if(setting_fragment == null){
+                    setting_fragment = new SettingFragment();
+                    getFragmentManager().beginTransaction().add(R.id.m_home_framelayout, setting_fragment,"setting").commit();
                 }
-                showFragment("notifications");
+                showFragment("setting");
                 break;
 
             case R.id.m_home_drawleft_personaldata:
@@ -154,6 +153,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     /** fragement的显示 */
     private void showFragment(String tag) {
+
+        if(tag == "setting"){
+            getFragmentManager().beginTransaction().show(setting_fragment).commit();
+        }
             Fragment tagFragment = getSupportFragmentManager().findFragmentByTag(tag);
         for (Fragment fragment : mFragmentList) {
             String tag1 = fragment.getTag();
