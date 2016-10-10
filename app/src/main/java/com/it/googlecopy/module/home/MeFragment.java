@@ -1,5 +1,6 @@
 package com.it.googlecopy.module.home;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,20 +12,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.it.googlecopy.R;
-import com.it.googlecopy.base.BaseFragment;
 
 /**
  * Created by je on 16-10-2.
  */
 
-public class WorkFragment extends Fragment {
+public class MeFragment extends Fragment {
     Toolbar mToolbar;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable
             Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.work_fragment, container, false);
+        View view = inflater.inflate(R.layout.me_fragment, container, false);
         mToolbar= (Toolbar) view.findViewById(R.id.toolbar);
         return view;
     }
@@ -33,13 +33,15 @@ public class WorkFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         HomeActivity activity = (HomeActivity) getActivity();
-        mToolbar.setTitle("社群");
+        mToolbar.setTitle("");
         activity.setSupportActionBar(mToolbar);
 
         DrawerLayout drawerLayout = (DrawerLayout) activity.findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(activity,
                 drawerLayout, mToolbar, R.string.navigation_drawer_open, R.string
                 .navigation_drawer_close);
+        //mToolbar.setBackgroundResource(android.R.color.holo_green_dark);
+        mToolbar.setTitleTextColor(Color.WHITE);
         drawerToggle.syncState();
     }
 }
