@@ -6,6 +6,14 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +28,10 @@ public class CollectionPagerAdapter extends FragmentPagerAdapter {
         super(fm);
     }
 
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        //super.destroyItem(container, position, object);
+    }
 
     @Override
     public CharSequence getPageTitle(int position) {
@@ -40,4 +52,8 @@ public class CollectionPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return mFragmentList==null?0:mFragmentList.size();
     }
+
+
+
+
 }

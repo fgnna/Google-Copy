@@ -19,6 +19,7 @@
             android:summary="@string/pref_summary_net_offline"
             android:title="@string/pref_title_net_offline"/>
 
+
         <Preference
             android:key="@string/pref_key_user_logout"
             android:summary="@string/pref_summary_user_logout"
