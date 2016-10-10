@@ -23,6 +23,18 @@ public class HomeItemViewHolder extends RecyclerView.ViewHolder {
     private TextView pulsText;
     private ImageButton pulsImgBtn;
     private ImageView contentImg;
+    private ImageButton commentBtn;
+
+    public ImageButton getShareBtn() {
+        return shareBtn;
+    }
+
+    private ImageButton shareBtn;
+
+    public ImageButton getCommentBtn() {
+        return commentBtn;
+    }
+
 
     public ImageView getContentImg() {
         return contentImg;
@@ -57,7 +69,8 @@ public class HomeItemViewHolder extends RecyclerView.ViewHolder {
         this.title = (TextView) itemView.findViewById(R.id.home_item_title);
         this.pulsText = (TextView) itemView.findViewById(R.id.home_item_plus_text);
         this.contentImg = (ImageView) itemView.findViewById(R.id.home_item_contentimg);
-
+        this.commentBtn = (ImageButton) itemView.findViewById(R.id.home_item_comment_imgbtn);
+        this.shareBtn = (ImageButton) itemView.findViewById(R.id.home_item_share_imgbtn);
     }
 
 

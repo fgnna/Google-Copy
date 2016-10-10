@@ -15,10 +15,10 @@
         <!--实现视差控件-->
         <!--contentScrim屏幕固定到顶端后的背景-->
         <android.support.design.widget.CollapsingToolbarLayout
-
+            app:title="我的"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:contentScrim="@android:color/holo_red_dark"
+            app:contentScrim="@android:color/holo_green_dark"
             app:layout_scrollFlags="scroll|enterAlways">
 
             <!--实现视差的背景图片-->
@@ -32,15 +32,13 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-
                     android:id="@+id/me_toolbar_img"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     app:layout_collapseMode="parallax"
                     app:layout_collapseParallaxMultiplier="0.6"
                     android:scaleType="centerInside"
-                    android:src="@drawable/iconic_oob_bubbles"
-                   />
+                    android:src="@drawable/iconic_oob_bubbles"/>
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="90dp"
@@ -78,8 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="#7effffff"
-                app:layout_collapseMode="pin"
-            >
+                app:layout_collapseMode="pin">
 
             </android.support.v7.widget.Toolbar>
 
@@ -93,17 +90,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:text="@string/large_text"/>
 
-
     </android.support.v4.widget.NestedScrollView>
-
-
-
-
-
 </android.support.design.widget.CoordinatorLayout>

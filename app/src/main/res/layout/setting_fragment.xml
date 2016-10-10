@@ -16,7 +16,6 @@
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/notifications_fragment_recyvlerview"
         android:layout_width="match_parent"

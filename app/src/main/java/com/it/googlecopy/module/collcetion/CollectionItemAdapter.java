@@ -36,6 +36,11 @@ public class CollectionItemAdapter extends RecyclerView.Adapter<CollectionViewHo
     private List<CollectionBean.DataBean> mCollectionBeanList;
     private Context mContext;
 
+    public void setDatas(List<CollectionBean.DataBean> dataBeen){
+        this.mCollectionBeanList = dataBeen;
+        notifyDataSetChanged();
+    }
+
     public CollectionItemAdapter(List<CollectionBean.DataBean> beanList) {
         this.mCollectionBeanList = beanList;
     }
@@ -84,7 +89,6 @@ public class CollectionItemAdapter extends RecyclerView.Adapter<CollectionViewHo
                         Palette.Swatch vibrantSwatch = palette.getDarkVibrantSwatch();
                         holder.getCollection_imgbuttom().setBackgroundColor(vibrantSwatch
                                 .getRgb());
-                        System.out.println("getRGB-------" + vibrantSwatch.getRgb());
                     }
                 });
             }
@@ -92,22 +96,6 @@ public class CollectionItemAdapter extends RecyclerView.Adapter<CollectionViewHo
 
         holder.getCollection_text_auther().setText(bean.getUserName());
         holder.getCollection_text_titile().setText(bean.getTitle());
-
-
-
-            /*   Palette.Builder builder = Palette.from(bitmap);
-                        builder.generate(new Palette.PaletteAsyncListener() {
-                            @Override
-                            public void onGenerated(Palette palette) {
-                                //获取到充满活力的这种色调
-                                Palette.Swatch vibrantSwatch = palette.getDarkVibrantSwatch();
-                                holder.getCollection_imgbuttom().setBackgroundColor(vibrantSwatch
-                                        .getRgb());
-                                System.out.println("getRGB-------" + vibrantSwatch.getRgb());
-                                bitmap.recycle();
-                            }
-                        }*/
-
         }
 
 

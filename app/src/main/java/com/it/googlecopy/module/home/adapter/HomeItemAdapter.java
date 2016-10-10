@@ -1,6 +1,8 @@
 package com.it.googlecopy.module.home.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +10,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.it.googlecopy.R;
+import com.it.googlecopy.module.home.HomeDetail;
 import com.it.googlecopy.module.home.adapter.Holder.HomeItemViewHolder;
-import com.it.googlecopy.module.home.bean.HomeItem;
+import com.it.googlecopy.module.home.model.bean.HomeItem;
+import com.it.googlecopy.utils.ImgTempCache;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +29,10 @@ public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemViewHolder> {
 
     private List<HomeItem.DataBean> itemList;
     Context mContext;
+
     private List<Integer> checkPositionlist; //选中的数据
 
-    public HomeItemAdapter(List<HomeItem.DataBean> itemList) {
+    public  HomeItemAdapter(List<HomeItem.DataBean> itemList) {
         this.itemList = itemList;
     }
 
@@ -41,10 +48,8 @@ public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(HomeItemViewHolder holder, int position) {
-        HomeItem.DataBean dataBean = itemList.get(position);
-        Glide.with(mContext).load(dataBean.getAvaterUrl()).placeholder(R.drawable
-                .bg_toast_grey700_44).into(holder.getHead());
+    public void onBindViewHolder(final HomeItemViewHolder holder, int position) {
+        final HomeItem.DataBean dataBean = itemList.get(position);
 
         TextView pulsText = holder.getPulsText();
         int likeCount = dataBean.getLikeCount();
@@ -69,14 +74,59 @@ public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemViewHolder> {
         }
         holder.getTitle().setText(dataBean.getTitle());
         holder.getUserName().setText(dataBean.getUserName());
-        Glide.with(mContext).load(dataBean.getImgUrl()).placeholder(R.drawable.bg).into(holder
-                .getContentImg());
+        Glide.with(mContext).load(dataBean.getAvaterUrl()).asBitmap().placeholder(R.drawable
+                .bg_toast_grey700_44).into(new SimpleTarget<Bitmap>() {
+            @Override
+            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                ImgTempCache.addCache(dataBean.getAvaterUrl(),resource);
+                holder.getHead().setImageBitmap(resource);
+            }
+        });
+        Glide.with(mContext).load(dataBean.getImgUrl()).asBitmap().placeholder(R.drawable.bg_toast_grey700_44).into(new SimpleTarget<Bitmap>() {
+            @Override
+            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                ImgTempCache.addCache(dataBean.getImgUrl(),resource);
+                holder.getContentImg().setImageBitmap(resource);
+            }
+        });
+
+
+        holder.getCommentBtn().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemClick(dataBean);
+            }
+        });
+        holder.getContentImg().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemClick(dataBean);
+            }
+        });
+
+        holder.getShareBtn().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemClick(dataBean);
+            }
+        });
+        System.out.println(dataBean.toString());
+
 
     }
-
+    private void itemClick(HomeItem.DataBean dataBean) {
+        Intent intent = new Intent(mContext, HomeDetail.class);
+        intent.putExtra("bean",dataBean);
+        mContext.startActivity(intent);
+    }
     @Override
     public int getItemCount() {
         return itemList.size();
+    }
+
+    public void setDatas(List<HomeItem.DataBean> list){
+        this.itemList = list;
+        notifyDataSetChanged();
     }
 
 
