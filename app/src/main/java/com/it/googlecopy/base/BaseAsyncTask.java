@@ -5,9 +5,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 
-import com.saidian.zuqiukong.base.activity.BaseActivity;
-import com.saidian.zuqiukong.base.presenter.viewinterface.NewBaseUiInterface;
-
 import java.lang.ref.WeakReference;
 
 /**
