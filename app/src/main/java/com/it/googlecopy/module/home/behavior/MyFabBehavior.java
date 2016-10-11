@@ -1,4 +1,4 @@
-package com.it.googlecopy.module.home;
+package com.it.googlecopy.module.home.behavior;
 
 import android.animation.Animator;
 import android.content.Context;

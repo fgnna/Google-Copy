@@ -1,4 +1,4 @@
-package com.it.googlecopy.module.collcetion;
+package com.it.googlecopy.module.collcetion.model.bean;
 
 import java.io.Serializable;
 import java.util.List;

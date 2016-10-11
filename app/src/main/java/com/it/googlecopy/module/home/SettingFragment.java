@@ -1,57 +1,8 @@
 package com.it.googlecopy.module.home;
 
-import android.graphics.Color;
-import android.os.Bundle;
-
-import android.preference.PreferenceFragment;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.it.googlecopy.R;
-
 /**
- * Created by je on 16-10-2.
+ * Created by je on 16-10-11.
  */
 
-public class SettingFragment extends PreferenceFragment{
-   Toolbar mToolbar;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.pref_settings);
-
-    }
-
-    /* @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable
-            Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.setting_fragment, container, false);
-        mToolbar= (Toolbar) view.findViewById(R.id.toolbar);
-        return view;
-    }*/
-
-    /*@Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        HomeActivity activity = (HomeActivity) getActivity();
-        mToolbar.setTitle("设置");
-        activity.setSupportActionBar(mToolbar);
-
-        DrawerLayout drawerLayout = (DrawerLayout) activity.findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(activity,
-                drawerLayout, mToolbar, R.string.navigation_drawer_open, R.string
-                .navigation_drawer_close);
-        mToolbar.setBackgroundResource(android.R.color.holo_red_dark);
-        mToolbar.setTitleTextColor(Color.WHITE);
-        drawerToggle.syncState();
-    }*/
+public class SettingFragment {
 }
-

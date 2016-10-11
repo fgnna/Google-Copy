@@ -1,7 +1,6 @@
-package com.it.googlecopy.module.home;
+package com.it.googlecopy.module.home.behavior;
 
 import android.content.Context;
-import android.nfc.Tag;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewCompat;

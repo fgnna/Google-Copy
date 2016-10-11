@@ -1,4 +1,4 @@
-package com.it.googlecopy.module.home;
+package com.it.googlecopy.module.collcetion;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -25,6 +25,7 @@ import com.it.googlecopy.R;
 import com.it.googlecopy.module.collcetion.CollectionBean;
 import com.it.googlecopy.module.collcetion.CollectionPagerAdapter;
 import com.it.googlecopy.module.collcetion.ChoiceFragment;
+import com.it.googlecopy.module.home.HomeActivity;
 import com.it.googlecopy.utils.ThreadPoolUtil;
 
 import java.util.ArrayList;
