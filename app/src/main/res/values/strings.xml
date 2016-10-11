@@ -169,4 +169,6 @@
         <item>6</item>
         <item>2</item>
     </string-array>
+
+    <string name="fab_view_behavior" translatable="false">android.support.design.widget.FloatingActionButton$Behavior</string>
 </resources>

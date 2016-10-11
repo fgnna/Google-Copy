@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
         android:key="@string/pref_key_user_settings"
         android:title="@string/pref_title_user_settings">
-        <Preference android:key="@string/pref_key_user_info"/>
 
         <!--android:summary="@string/pref_summary_user_vip" 表示摘要，标题下方的小字-->
         <EditTextPreference

@@ -18,12 +18,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.it.googlecopy.R;
+import com.it.googlecopy.module.collcetion.CollectionFragment;
 import com.it.googlecopy.utils.ImgUtil;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -32,7 +31,6 @@ import static com.it.googlecopy.R.id.m_home_framelayout;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Fragment currentFragment;
     public Toolbar mToolbar;
     FragmentManager fm;
     HomeFragment home_fragment;

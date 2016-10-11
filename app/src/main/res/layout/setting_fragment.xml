@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+>
 
-    <android.support.design.widget.AppBarLayout
+    <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:layout_scrollFlags="scroll|enterAlways">
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/setting_toolbar"
+        app:title="设置"
+        app:titleTextColor="@android:color/white"/>
 
-        </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/notifications_fragment_recyvlerview"
+    <fragment
+        android:id="@+id/setting_detail_fragment"
+        android:name="com.it.googlecopy.module.home.SettingDetailFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
+        android:layout_marginTop="?attr/actionBarSize"/>
+
+</FrameLayout>
 
 
-</android.support.design.widget.CoordinatorLayout>
+
+
+

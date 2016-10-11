@@ -2,31 +2,19 @@ package com.it.googlecopy.module.collcetion;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import com.bumptech.glide.load.resource.bitmap.*;
+
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.target.Target;
 import com.it.googlecopy.R;
-import com.it.googlecopy.utils.ThreadPoolUtil;
+import com.it.googlecopy.module.collcetion.model.bean.CollectionBean;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.List;
-
-import static android.R.attr.bitmap;
 
 /**
  * Created by je on 16-10-6.
@@ -57,7 +45,7 @@ public class CollectionItemAdapter extends RecyclerView.Adapter<CollectionViewHo
     @Override
     public void onBindViewHolder(final CollectionViewHolder holder, int position) {
         final CollectionBean.DataBean bean = mCollectionBeanList.get(position);
-        Glide.with(mContext).load(bean.getAvaterUrl()).placeholder(R.drawable.bg_toast_grey700_44)
+        Glide.with(mContext).load(bean.avaterUrl).placeholder(R.drawable.bg_toast_grey700_44)
                 .into(holder.getCollection_imgHead());
 
       /*  Glide.with(mContext).load(bean.getImgUrl()).listener(new RequestListener<String, GlideDrawable>() {
@@ -77,7 +65,7 @@ public class CollectionItemAdapter extends RecyclerView.Adapter<CollectionViewHo
             }
         }).asBitmap().into(holder.getCollection_imgHead());*/
 
-        Glide.with(mContext).load(bean.getImgUrl()).asBitmap().into(new SimpleTarget<Bitmap>() {
+        Glide.with(mContext).load(bean.imgUrl).asBitmap().into(new SimpleTarget<Bitmap>() {
             @Override
             public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                 holder.getCollection_imgtop().setImageBitmap(resource);
@@ -94,8 +82,8 @@ public class CollectionItemAdapter extends RecyclerView.Adapter<CollectionViewHo
             }
         });
 
-        holder.getCollection_text_auther().setText(bean.getUserName());
-        holder.getCollection_text_titile().setText(bean.getTitle());
+        holder.getCollection_text_auther().setText(bean.userName);
+        holder.getCollection_text_titile().setText(bean.title);
         }
 
 

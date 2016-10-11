@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -27,7 +29,9 @@ import com.android.volley.toolbox.Volley;
 
 import com.google.gson.Gson;
 import com.it.googlecopy.R;
+import com.it.googlecopy.base.BaseAsyncTask;
 import com.it.googlecopy.module.home.adapter.HomeItemAdapter;
+import com.it.googlecopy.module.home.model.HomeModel;
 import com.it.googlecopy.module.home.model.bean.HomeItem;
 import com.it.googlecopy.utils.ThreadPoolUtil;
 
@@ -47,6 +51,8 @@ public class HomeFragment extends Fragment {
     FloatingActionButton fab;
     HomeItemAdapter homeItemAdapter;
     CoordinatorLayout conten;
+    AppBarLayout mAppBarLayout;
+    LinearLayout mLinearLayout;
 
     @Nullable
     @Override
@@ -59,12 +65,11 @@ public class HomeFragment extends Fragment {
         mRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.m_home_fragment_refreshlayout);
         conten = (CoordinatorLayout) view.findViewById(R.id.homt_conten);
         mHomeActivity = (HomeActivity) getActivity();
-        mHomeActivity.mLinearLayout.setVerticalScrollBarEnabled(true);
+        mAppBarLayout = (AppBarLayout) view.findViewById(R.id.home_fragment_appbar);
+        mLinearLayout = mHomeActivity.mLinearLayout;
         initRefreshLayout();
         initRecyclerView();
 
-        CoordinatorLayout.LayoutParams coordinatorLayoutLayoutParams = (CoordinatorLayout
-                .LayoutParams) conten.getLayoutParams();
 
 
 //        coordinatorLayoutLayoutParams.setBehavior();
@@ -86,14 +91,21 @@ public class HomeFragment extends Fragment {
         mToolbar.setBackgroundResource(android.R.color.holo_red_dark);
         mToolbar.setTitleTextColor(Color.WHITE);
         drawerToggle.syncState();
-       /* fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Snackbar.make(v,"别乱点！",Snackbar.LENGTH_SHORT).setAction("Action", null).show();
-            }
-        });*/
+        initToolbarChangerListener();
 
 
+
+    }
+
+    private void initToolbarChangerListener() {
+      mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+          @Override
+          public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+              System.out.println("appBarLayout-------"+verticalOffset);
+              int i = Math.abs(verticalOffset);
+              mLinearLayout.setTranslationY(i);
+          }
+      });
     }
 
     private void initRefreshLayout() {
@@ -147,23 +159,25 @@ public class HomeFragment extends Fragment {
         if (mDataBeen == null) {
             mDataBeen = new ArrayList<>();
         }
-        final Gson gson = new Gson();
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        StringRequest stringRequest = new StringRequest("http://192.168.1" +
-                ".105:8080/demo/query", new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                HomeItem homeItem = gson.fromJson(response, HomeItem.class);
-                mDataBeen.addAll(homeItem.data);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println("-------------------------------" + error.toString());
-            }
-        });
-        requestQueue.add(stringRequest);
 
 
+        new BaseAsyncTask(getActivity(), null){
+
+            @Override
+            protected Object doInBackground() throws Exception {
+                return HomeModel.getHomeData();
+            }
+
+            @Override
+            protected void onNullData() {
+
+            }
+
+            @Override
+            protected void onSuccess(Object data) {
+                mDataBeen.addAll(((HomeItem)data).data);
+            }
+        }.execute();
     }
+
 }

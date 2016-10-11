@@ -2,8 +2,8 @@ package com.it.googlecopy.module.collcetion;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -13,20 +13,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
 import com.it.googlecopy.R;
-import com.it.googlecopy.module.collcetion.CollectionBean;
-import com.it.googlecopy.module.collcetion.CollectionPagerAdapter;
-import com.it.googlecopy.module.collcetion.ChoiceFragment;
+import com.it.googlecopy.module.collcetion.model.bean.CollectionBean;
 import com.it.googlecopy.module.home.HomeActivity;
-import com.it.googlecopy.utils.ThreadPoolUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +30,8 @@ public class CollectionFragment extends Fragment {
     Toolbar mToolbar;
     View rootView;
     HomeActivity activity;
-    boolean isFrist = false;
     private List<CollectionBean.DataBean> mBeanList = new ArrayList<>();
+    LinearLayout mLinearLayout;
 
 
     @Nullable
@@ -48,6 +39,7 @@ public class CollectionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable
             Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.collection_fragment, container, false);
+        mLinearLayout = (LinearLayout) ((HomeActivity)getActivity()).findViewById(R.id.home_llt);
         return rootView;
     }
 
@@ -56,7 +48,6 @@ public class CollectionFragment extends Fragment {
         ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.m_colletion_vp);
         final CollectionPagerAdapter pagerAdapter = new CollectionPagerAdapter(activity
                 .getSupportFragmentManager());
-
         pagerAdapter.addFragment(ChoiceFragment.newInstance(this), "精选");
         pagerAdapter.addFragment(ChoiceFragment.newInstance(this), "已关注");
         pagerAdapter.addFragment(ChoiceFragment.newInstance(this), "你的收藏集");
@@ -98,6 +89,14 @@ public class CollectionFragment extends Fragment {
         mToolbar.setBackgroundResource(android.R.color.holo_blue_dark);
         mToolbar.setTitleTextColor(Color.WHITE);
         activity.setSupportActionBar(mToolbar);
+        AppBarLayout appBarLayout = (AppBarLayout) rootView.findViewById(R.id.collection_appBarLayout);
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                int i = Math.abs(verticalOffset);
+                mLinearLayout.setTranslationY(i);
+            }
+        });
     }
 
 

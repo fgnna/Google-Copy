@@ -23,9 +23,6 @@
 
         </activity>
         <activity android:name=".module.home.HomeDetail"/>
-        <activity android:name=".base.TintTest">
-
-        </activity>
     </application>
 
 </manifest>

@@ -63,7 +63,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_toRightOf="@id/home_detail_author"
-                        android:scaleType="centerInside"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/ic_keyboard_arrow_right_black_24dp"/>
 
                     <TextView android:layout_width="wrap_content"
@@ -83,11 +83,12 @@
                           android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:maxLines="1"
+                          android:layout_margin="5dp"
                           android:text="标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题"/>
 
                 <ImageView android:id="@+id/home_detail_contentimg"
                            android:layout_width="match_parent"
-                           android:layout_height="wrap_content"
+                           android:layout_height="300dp"
                            android:scaleType="centerCrop"
                            android:src="@drawable/bg"/>
                 <RelativeLayout android:layout_width="match_parent"

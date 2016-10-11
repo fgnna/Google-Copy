@@ -19,7 +19,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.it.googlecopy.R;
-import com.it.googlecopy.module.home.CollectionFragment;
+import com.it.googlecopy.base.BaseAsyncTask;
+
+import com.it.googlecopy.module.collcetion.model.bean.CollectionBean;
+import com.it.googlecopy.module.collcetion.model.bean.CollectionModel;
 import com.it.googlecopy.utils.ThreadPoolUtil;
 
 import java.util.ArrayList;
@@ -37,7 +40,6 @@ public class ChoiceFragment extends Fragment {
     public static ChoiceFragment newInstance(Fragment fragment){
         ChoiceFragment choiceFragment = new ChoiceFragment();
         choiceFragment.mCollectionFragment = (CollectionFragment) fragment;
-
         return choiceFragment;
     }
 
@@ -100,29 +102,25 @@ public class ChoiceFragment extends Fragment {
 
 
     public void loadData() {
-        final Gson gson = new Gson();
-        RequestQueue requestQueue = Volley.newRequestQueue(mCollectionFragment.getActivity());
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://192.168.1" +
-                ".105:8080/demo/keep", new Response.Listener<String>() {
+        if(mBeanList == null){
+            mBeanList = new ArrayList<>();
+        }
+        new BaseAsyncTask(getActivity(), null) {
+            @Override
+            protected Object doInBackground() throws Exception {
+                return CollectionModel.getCollectionData();
+            }
 
             @Override
-            public void onResponse(String response) {
-                System.out.println("keep 成功");
-                if(mBeanList == null){
-                    mBeanList = new ArrayList<>();
-                }
-                CollectionBean collectionBean = gson.fromJson(response, CollectionBean.class);
-                mBeanList.addAll(collectionBean.getData());
+            protected void onNullData() {
 
             }
-        }, new Response.ErrorListener() {
+
             @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println("keep 失败");
+            protected void onSuccess(Object data) {
+                mBeanList.addAll(((CollectionBean)data).data);
             }
-        });
-
-        requestQueue.add(stringRequest);
+        }.execute();
     }
 
 

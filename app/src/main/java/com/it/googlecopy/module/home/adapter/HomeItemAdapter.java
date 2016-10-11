@@ -52,9 +52,9 @@ public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemViewHolder> {
         final HomeItem.DataBean dataBean = itemList.get(position);
 
         TextView pulsText = holder.getPulsText();
-        int likeCount = dataBean.getLikeCount();
+        int likeCount = dataBean.likeCount;
         pulsText.setText(likeCount + "");
-        if (dataBean.isIsLike()) {
+        if (dataBean.isLike) {
             if(!checkPositionlist.contains(holder.getPulsImgBtn().getTag())) {
                 holder.getPulsImgBtn().setImageResource(R.drawable.quantum_ic_plus_one_black_24);
                 holder.getPulsImgBtn().setTag(position);
@@ -72,20 +72,20 @@ public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemViewHolder> {
                 checkPositionlist.remove(new Integer(position));
             }
         }
-        holder.getTitle().setText(dataBean.getTitle());
-        holder.getUserName().setText(dataBean.getUserName());
-        Glide.with(mContext).load(dataBean.getAvaterUrl()).asBitmap().placeholder(R.drawable
+        holder.getTitle().setText(dataBean.title);
+        holder.getUserName().setText(dataBean.userName);
+        Glide.with(mContext).load(dataBean.avaterUrl).asBitmap().placeholder(R.drawable
                 .bg_toast_grey700_44).into(new SimpleTarget<Bitmap>() {
             @Override
             public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                ImgTempCache.addCache(dataBean.getAvaterUrl(),resource);
+                ImgTempCache.addCache(dataBean.avaterUrl,resource);
                 holder.getHead().setImageBitmap(resource);
             }
         });
-        Glide.with(mContext).load(dataBean.getImgUrl()).asBitmap().placeholder(R.drawable.bg_toast_grey700_44).into(new SimpleTarget<Bitmap>() {
+        Glide.with(mContext).load(dataBean.imgUrl).asBitmap().placeholder(R.drawable.bg_toast_grey700_44).into(new SimpleTarget<Bitmap>() {
             @Override
             public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                ImgTempCache.addCache(dataBean.getImgUrl(),resource);
+                ImgTempCache.addCache(dataBean.imgUrl,resource);
                 holder.getContentImg().setImageBitmap(resource);
             }
         });

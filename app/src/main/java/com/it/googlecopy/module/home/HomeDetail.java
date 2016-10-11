@@ -36,24 +36,24 @@ public class HomeDetail extends AppCompatActivity {
         setContentView(R.layout.first_detail);
         initToolBar();
         CircleImageView headImg = (CircleImageView) findViewById(R.id.home_detail_head);
-        headImg.setImageBitmap(ImgTempCache.sBitmapList.get(bean.getAvaterUrl()));
+        headImg.setImageBitmap(ImgTempCache.sBitmapList.get(bean.avaterUrl));
         ImageView contenImg = (ImageView) findViewById(R.id.home_detail_contentimg);
-        contenImg.setImageBitmap(ImgTempCache.sBitmapList.get(bean.getImgUrl()));
+        contenImg.setImageBitmap(ImgTempCache.sBitmapList.get(bean.imgUrl));
         TextView title = (TextView) findViewById(R.id.home_detail_title);
-        title.setText(bean.getTitle());
+        title.setText(bean.title);
         TextView userName = (TextView) findViewById(R.id.home_detail_author);
-        userName.setText(bean.getUserName());
-        if (bean.isIsLike()) {
+        userName.setText(bean.userName);
+        if (bean.isLike) {
             ImageButton plusImgBtn = (ImageButton) findViewById(R.id.home_detail_plus_imgbtn);
             plusImgBtn.setImageResource(R.drawable.quantum_ic_plus_one_black_24);
-            String str = bean.getLikeCount() + "";
+            String str = bean.likeCount+ "";
             int i = Integer.parseInt(str);
             i++;
             TextView count = (TextView) findViewById(R.id.home_detail_plus_text);
             count.setText(String.valueOf(i));
         }else {
             TextView count = (TextView) findViewById(R.id.home_detail_plus_text);
-            count.setText(bean.getLikeCount()+"");
+            count.setText(bean.likeCount +"");
         }
 
         LinearLayout comment = (LinearLayout) findViewById(R.id.first_detail_comment_llt);
