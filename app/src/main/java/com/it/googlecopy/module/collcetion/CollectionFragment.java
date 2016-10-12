@@ -1,5 +1,6 @@
 package com.it.googlecopy.module.collcetion;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.it.googlecopy.R;
+import com.it.googlecopy.base.BaseFragment;
 import com.it.googlecopy.module.collcetion.model.bean.CollectionBean;
 import com.it.googlecopy.module.home.HomeActivity;
 
@@ -26,22 +28,13 @@ import java.util.List;
  * Created by je on 16-10-2.
  */
 
-public class CollectionFragment extends Fragment {
+public class CollectionFragment extends BaseFragment {
     Toolbar mToolbar;
     View rootView;
     HomeActivity activity;
     private List<CollectionBean.DataBean> mBeanList = new ArrayList<>();
     LinearLayout mLinearLayout;
 
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable
-            Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.collection_fragment, container, false);
-        mLinearLayout = (LinearLayout) ((HomeActivity)getActivity()).findViewById(R.id.home_llt);
-        return rootView;
-    }
 
 
     private void initViewPagerAndTabs() {
@@ -60,18 +53,19 @@ public class CollectionFragment extends Fragment {
 
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public View initView() {
+        rootView = View.inflate(mContext, R.layout.collection_fragment, null);
+        mLinearLayout = (LinearLayout) ((HomeActivity) getActivity()).findViewById(R.id.home_llt);
+        return rootView;
+    }
+
+    @Override
+    public void initData() {
         activity = (HomeActivity) getActivity();
         initToolbar();
         initDrawerLayout();
         initViewPagerAndTabs();
-
-
     }
-
-
-
 
 
     private void initDrawerLayout() {
@@ -89,7 +83,8 @@ public class CollectionFragment extends Fragment {
         mToolbar.setBackgroundResource(android.R.color.holo_blue_dark);
         mToolbar.setTitleTextColor(Color.WHITE);
         activity.setSupportActionBar(mToolbar);
-        AppBarLayout appBarLayout = (AppBarLayout) rootView.findViewById(R.id.collection_appBarLayout);
+        AppBarLayout appBarLayout = (AppBarLayout) rootView.findViewById(R.id
+                .collection_appBarLayout);
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {

@@ -14,30 +14,28 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.it.googlecopy.R;
+import com.it.googlecopy.base.BaseFragment;
 
 /**
  * Created by je on 16-10-2.
  */
 
-public class MeFragment extends Fragment {
+public class MeFragment extends BaseFragment {
     Toolbar mToolbar;
     AppBarLayout mAppBarLayout;
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable
-            Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.me_fragment, container, false);
+
+    @Override
+    public View initView() {
+        View view = View.inflate(mContext,R.layout.me_fragment, null);
         mToolbar= (Toolbar) view.findViewById(R.id.toolbar);
         mAppBarLayout = (AppBarLayout) view.findViewById(R.id.app_bar);
-
         return view;
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void initData() {
         HomeActivity activity = (HomeActivity) getActivity();
         mToolbar.setTitle("");
         activity.setSupportActionBar(mToolbar);
@@ -46,10 +44,10 @@ public class MeFragment extends Fragment {
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(activity,
                 drawerLayout, mToolbar, R.string.navigation_drawer_open, R.string
                 .navigation_drawer_close);
-        //mToolbar.setBackgroundResource(android.R.color.holo_green_dark);
         mToolbar.setTitleTextColor(Color.WHITE);
         drawerToggle.syncState();
         initToolbarChanger();
+
     }
 
     private void initToolbarChanger() {

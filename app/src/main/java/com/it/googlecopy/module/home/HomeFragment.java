@@ -30,6 +30,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.it.googlecopy.R;
 import com.it.googlecopy.base.BaseAsyncTask;
+import com.it.googlecopy.base.BaseFragment;
 import com.it.googlecopy.module.home.adapter.HomeItemAdapter;
 import com.it.googlecopy.module.home.model.HomeModel;
 import com.it.googlecopy.module.home.model.bean.HomeItem;
@@ -42,7 +43,7 @@ import java.util.List;
  * Created by je on 16-10-2.
  */
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends BaseFragment {
     Toolbar mToolbar;
     RecyclerView mRecyclerView;
     List<HomeItem.DataBean> mDataBeen;
@@ -54,11 +55,10 @@ public class HomeFragment extends Fragment {
     AppBarLayout mAppBarLayout;
     LinearLayout mLinearLayout;
 
-    @Nullable
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
-            savedInstanceState) {
-        View view = inflater.inflate(R.layout.home_fragment, container, false);
+    public View initView() {
+        View view = View.inflate(mContext,R.layout.home_fragment, null);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.home_fragment_recyvlerview);
         mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
         fab = (FloatingActionButton) view.findViewById(R.id.fab);
@@ -69,16 +69,11 @@ public class HomeFragment extends Fragment {
         mLinearLayout = mHomeActivity.mLinearLayout;
         initRefreshLayout();
         initRecyclerView();
-
-
-
-//        coordinatorLayoutLayoutParams.setBehavior();
         return view;
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void initData() {
         HomeActivity activity = (HomeActivity) getActivity();
         mToolbar.setTitle("首页");
 
@@ -92,9 +87,6 @@ public class HomeFragment extends Fragment {
         mToolbar.setTitleTextColor(Color.WHITE);
         drawerToggle.syncState();
         initToolbarChangerListener();
-
-
-
     }
 
     private void initToolbarChangerListener() {
