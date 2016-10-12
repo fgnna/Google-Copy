@@ -6,6 +6,6 @@
  * 列表数据展示使用SwipeRefreshLayout+RecyclerView，实现页面数据刷新加载
  * 运用Tini实现导航栏选中高亮
  * 运用Palette实现照片图片主题色获取的获取	
- 效果图：
  
+ -效果图：
 ![image](https://github.com/sjy1991/Google-Copy/blob/master/gif/googleCopy.gif)
