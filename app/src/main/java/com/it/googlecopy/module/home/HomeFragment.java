@@ -93,7 +93,6 @@ public class HomeFragment extends BaseFragment {
       mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
           @Override
           public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-              System.out.println("appBarLayout-------"+verticalOffset);
               int i = Math.abs(verticalOffset);
               mLinearLayout.setTranslationY(i);
           }

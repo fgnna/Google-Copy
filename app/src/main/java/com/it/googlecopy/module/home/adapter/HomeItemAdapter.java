@@ -17,9 +17,14 @@ import com.it.googlecopy.module.home.HomeDetail;
 import com.it.googlecopy.module.home.adapter.Holder.HomeItemViewHolder;
 import com.it.googlecopy.module.home.model.bean.HomeItem;
 import com.it.googlecopy.utils.ImgTempCache;
+import com.it.googlecopy.utils.ShareUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
+
 
 /**
  * Created by je on 16-10-4.
@@ -107,10 +112,9 @@ public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemViewHolder> {
         holder.getShareBtn().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemClick(dataBean);
+                ShareUtil.showShare(mContext);
             }
         });
-        System.out.println(dataBean.toString());
 
 
     }
@@ -128,6 +132,11 @@ public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemViewHolder> {
         this.itemList = list;
         notifyDataSetChanged();
     }
+
+
+
+
+
 
 
 }

@@ -12,8 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.it.googlecopy.R;
+import com.it.googlecopy.module.home.adapter.HomeItemAdapter;
 import com.it.googlecopy.module.home.model.bean.HomeItem;
 import com.it.googlecopy.utils.ImgTempCache;
+import com.it.googlecopy.utils.ShareUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +69,14 @@ public class HomeDetail extends AppCompatActivity {
         for (int i = 0; i < mViewList.size(); i++) {
             comment.addView(mViewList.get(i));
         }
+        ImageButton sharImgBtn = (ImageButton) findViewById(R.id.home_detail_share_imgbtn);
+        sharImgBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShareUtil.showShare(HomeDetail.this);
+            }
+        });
+
 
     }
 
