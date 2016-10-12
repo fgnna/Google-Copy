@@ -11,16 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
 import com.it.googlecopy.R;
 import com.it.googlecopy.base.BaseAsyncTask;
-
 import com.it.googlecopy.module.collcetion.model.bean.CollectionBean;
 import com.it.googlecopy.module.collcetion.model.bean.CollectionModel;
 import com.it.googlecopy.utils.ThreadPoolUtil;
